@@ -1,0 +1,531 @@
+dev.marcinromanowski.clusterbuster4j.sql.ClusterQueryTest.shouldAllowToCreateClusteringQuery[All values are valid]=with bbox_query as (
+  select
+    geom as center,
+    ? as cluster_size,
+    ? as cluster_no,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    (
+      select
+        name,
+        address,
+        city,
+        postal_code,
+        geom
+      from
+        places
+    ) as base_query
+  where
+    ST_Intersects(geom, ST_MakeEnvelope(?, ?, ?, ?, ?))
+),
+cluster_20 as (
+  select
+    center,
+    cluster_size,
+    cluster_no as previous_cluster_no,
+    ST_ClusterDBSCAN(center, ?, ?) over () as cluster,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    bbox_query
+),
+grouped_cluster_20 as (
+  select
+    ST_Centroid(ST_Collect(center)) as center,
+    sum(cluster_size) as cluster_size,
+    cluster as cluster_no,
+    FIRST(name) as name,
+    FIRST(address) as address,
+    FIRST(city) as city,
+    FIRST(postal_code) as postal_code,
+    FIRST(geom) as geom
+  from
+    cluster_20
+  group by
+    cluster
+),
+cluster_19 as (
+  select
+    center,
+    cluster_size,
+    cluster_no as previous_cluster_no,
+    ST_ClusterDBSCAN(center, ?, ?) over () as cluster,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    grouped_cluster_20
+),
+grouped_cluster_19 as (
+  select
+    ST_Centroid(ST_Collect(center)) as center,
+    sum(cluster_size) as cluster_size,
+    cluster as cluster_no,
+    FIRST(name) as name,
+    FIRST(address) as address,
+    FIRST(city) as city,
+    FIRST(postal_code) as postal_code,
+    FIRST(geom) as geom
+  from
+    cluster_19
+  group by
+    cluster
+),
+cluster_18 as (
+  select
+    center,
+    cluster_size,
+    cluster_no as previous_cluster_no,
+    ST_ClusterDBSCAN(center, ?, ?) over () as cluster,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    grouped_cluster_19
+),
+grouped_cluster_18 as (
+  select
+    ST_Centroid(ST_Collect(center)) as center,
+    sum(cluster_size) as cluster_size,
+    cluster as cluster_no,
+    FIRST(name) as name,
+    FIRST(address) as address,
+    FIRST(city) as city,
+    FIRST(postal_code) as postal_code,
+    FIRST(geom) as geom
+  from
+    cluster_18
+  group by
+    cluster
+),
+cluster_17 as (
+  select
+    center,
+    cluster_size,
+    cluster_no as previous_cluster_no,
+    ST_ClusterDBSCAN(center, ?, ?) over () as cluster,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    grouped_cluster_18
+),
+grouped_cluster_17 as (
+  select
+    ST_Centroid(ST_Collect(center)) as center,
+    sum(cluster_size) as cluster_size,
+    cluster as cluster_no,
+    FIRST(name) as name,
+    FIRST(address) as address,
+    FIRST(city) as city,
+    FIRST(postal_code) as postal_code,
+    FIRST(geom) as geom
+  from
+    cluster_17
+  group by
+    cluster
+),
+cluster_16 as (
+  select
+    center,
+    cluster_size,
+    cluster_no as previous_cluster_no,
+    ST_ClusterDBSCAN(center, ?, ?) over () as cluster,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    grouped_cluster_17
+),
+grouped_cluster_16 as (
+  select
+    ST_Centroid(ST_Collect(center)) as center,
+    sum(cluster_size) as cluster_size,
+    cluster as cluster_no,
+    FIRST(name) as name,
+    FIRST(address) as address,
+    FIRST(city) as city,
+    FIRST(postal_code) as postal_code,
+    FIRST(geom) as geom
+  from
+    cluster_16
+  group by
+    cluster
+),
+cluster_15 as (
+  select
+    center,
+    cluster_size,
+    cluster_no as previous_cluster_no,
+    ST_ClusterDBSCAN(center, ?, ?) over () as cluster,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    grouped_cluster_16
+),
+grouped_cluster_15 as (
+  select
+    ST_Centroid(ST_Collect(center)) as center,
+    sum(cluster_size) as cluster_size,
+    cluster as cluster_no,
+    FIRST(name) as name,
+    FIRST(address) as address,
+    FIRST(city) as city,
+    FIRST(postal_code) as postal_code,
+    FIRST(geom) as geom
+  from
+    cluster_15
+  group by
+    cluster
+),
+cluster_14 as (
+  select
+    center,
+    cluster_size,
+    cluster_no as previous_cluster_no,
+    ST_ClusterDBSCAN(center, ?, ?) over () as cluster,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    grouped_cluster_15
+),
+grouped_cluster_14 as (
+  select
+    ST_Centroid(ST_Collect(center)) as center,
+    sum(cluster_size) as cluster_size,
+    cluster as cluster_no,
+    FIRST(name) as name,
+    FIRST(address) as address,
+    FIRST(city) as city,
+    FIRST(postal_code) as postal_code,
+    FIRST(geom) as geom
+  from
+    cluster_14
+  group by
+    cluster
+),
+cluster_13 as (
+  select
+    center,
+    cluster_size,
+    cluster_no as previous_cluster_no,
+    ST_ClusterDBSCAN(center, ?, ?) over () as cluster,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    grouped_cluster_14
+),
+grouped_cluster_13 as (
+  select
+    ST_Centroid(ST_Collect(center)) as center,
+    sum(cluster_size) as cluster_size,
+    cluster as cluster_no,
+    FIRST(name) as name,
+    FIRST(address) as address,
+    FIRST(city) as city,
+    FIRST(postal_code) as postal_code,
+    FIRST(geom) as geom
+  from
+    cluster_13
+  group by
+    cluster
+),
+cluster_12 as (
+  select
+    center,
+    cluster_size,
+    cluster_no as previous_cluster_no,
+    ST_ClusterDBSCAN(center, ?, ?) over () as cluster,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    grouped_cluster_13
+),
+grouped_cluster_12 as (
+  select
+    ST_Centroid(ST_Collect(center)) as center,
+    sum(cluster_size) as cluster_size,
+    cluster as cluster_no,
+    FIRST(name) as name,
+    FIRST(address) as address,
+    FIRST(city) as city,
+    FIRST(postal_code) as postal_code,
+    FIRST(geom) as geom
+  from
+    cluster_12
+  group by
+    cluster
+),
+cluster_11 as (
+  select
+    center,
+    cluster_size,
+    cluster_no as previous_cluster_no,
+    ST_ClusterDBSCAN(center, ?, ?) over () as cluster,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    grouped_cluster_12
+),
+grouped_cluster_11 as (
+  select
+    ST_Centroid(ST_Collect(center)) as center,
+    sum(cluster_size) as cluster_size,
+    cluster as cluster_no,
+    FIRST(name) as name,
+    FIRST(address) as address,
+    FIRST(city) as city,
+    FIRST(postal_code) as postal_code,
+    FIRST(geom) as geom
+  from
+    cluster_11
+  group by
+    cluster
+),
+cluster_10 as (
+  select
+    center,
+    cluster_size,
+    cluster_no as previous_cluster_no,
+    ST_ClusterDBSCAN(center, ?, ?) over () as cluster,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    grouped_cluster_11
+),
+grouped_cluster_10 as (
+  select
+    ST_Centroid(ST_Collect(center)) as center,
+    sum(cluster_size) as cluster_size,
+    cluster as cluster_no,
+    FIRST(name) as name,
+    FIRST(address) as address,
+    FIRST(city) as city,
+    FIRST(postal_code) as postal_code,
+    FIRST(geom) as geom
+  from
+    cluster_10
+  group by
+    cluster
+)
+select
+  cluster_size,
+  ST_X(center) as longitude,
+  ST_Y(center) as latitude,
+  case
+    when cluster_size = ? then name
+    else null
+  end,
+  case
+    when cluster_size = ? then address
+    else null
+  end,
+  case
+    when cluster_size = ? then city
+    else null
+  end,
+  case
+    when cluster_size = ? then postal_code
+    else null
+  end,
+  case
+    when cluster_size = ? then geom
+    else null
+  end
+from
+  grouped_cluster_10
+
+
+dev.marcinromanowski.clusterbuster4j.sql.ClusterQueryTest.shouldAllowToCreateClusteringQuery[Current zoom should be normalized to min zoom]=with bbox_query as (
+  select
+    geom as center,
+    ? as cluster_size,
+    ? as cluster_no,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    (
+      select
+        name,
+        address,
+        city,
+        postal_code,
+        geom
+      from
+        places
+    ) as base_query
+  where
+    ST_Intersects(geom, ST_MakeEnvelope(?, ?, ?, ?, ?))
+),
+cluster_16 as (
+  select
+    center,
+    cluster_size,
+    cluster_no as previous_cluster_no,
+    ST_ClusterDBSCAN(center, ?, ?) over () as cluster,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    bbox_query
+),
+grouped_cluster_16 as (
+  select
+    ST_Centroid(ST_Collect(center)) as center,
+    sum(cluster_size) as cluster_size,
+    cluster as cluster_no,
+    FIRST(name) as name,
+    FIRST(address) as address,
+    FIRST(city) as city,
+    FIRST(postal_code) as postal_code,
+    FIRST(geom) as geom
+  from
+    cluster_16
+  group by
+    cluster
+)
+select
+  cluster_size,
+  ST_X(center) as longitude,
+  ST_Y(center) as latitude,
+  case
+    when cluster_size = ? then name
+    else null
+  end,
+  case
+    when cluster_size = ? then address
+    else null
+  end,
+  case
+    when cluster_size = ? then city
+    else null
+  end,
+  case
+    when cluster_size = ? then postal_code
+    else null
+  end,
+  case
+    when cluster_size = ? then geom
+    else null
+  end
+from
+  grouped_cluster_16
+
+
+dev.marcinromanowski.clusterbuster4j.sql.ClusterQueryTest.shouldAllowToCreateClusteringQuery[Min, max and current zoom should be normalized to valid values]=with bbox_query as (
+  select
+    geom as center,
+    ? as cluster_size,
+    ? as cluster_no,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    (
+      select
+        name,
+        address,
+        city,
+        postal_code,
+        geom
+      from
+        places
+    ) as base_query
+  where
+    ST_Intersects(geom, ST_MakeEnvelope(?, ?, ?, ?, ?))
+),
+cluster_15 as (
+  select
+    center,
+    cluster_size,
+    cluster_no as previous_cluster_no,
+    ST_ClusterDBSCAN(center, ?, ?) over () as cluster,
+    name,
+    address,
+    city,
+    postal_code,
+    geom
+  from
+    bbox_query
+),
+grouped_cluster_15 as (
+  select
+    ST_Centroid(ST_Collect(center)) as center,
+    sum(cluster_size) as cluster_size,
+    cluster as cluster_no,
+    FIRST(name) as name,
+    FIRST(address) as address,
+    FIRST(city) as city,
+    FIRST(postal_code) as postal_code,
+    FIRST(geom) as geom
+  from
+    cluster_15
+  group by
+    cluster
+)
+select
+  cluster_size,
+  ST_X(center) as longitude,
+  ST_Y(center) as latitude,
+  case
+    when cluster_size = ? then name
+    else null
+  end,
+  case
+    when cluster_size = ? then address
+    else null
+  end,
+  case
+    when cluster_size = ? then city
+    else null
+  end,
+  case
+    when cluster_size = ? then postal_code
+    else null
+  end,
+  case
+    when cluster_size = ? then geom
+    else null
+  end
+from
+  grouped_cluster_15
